@@ -36,7 +36,7 @@ export default function MovieDetails() {
           <p>Abstract: {movie.abstract}</p>
 
           <h3 className="mt-4">Reviews</h3>
-          {reviews.map((review) => (
+          {movie.reviews.map((review) => (
             <div key={review.id} className="card mb-3">
               <div className="card-body">
                 <h5 className="card-title">Rating: {review.vote}/5</h5>
