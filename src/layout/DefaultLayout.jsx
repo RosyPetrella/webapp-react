@@ -1,13 +1,15 @@
 import { Outlet } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function DefaultLayout() {
   return (
     <>
-      <header>HEADER</header>
+      <Header />
       <main>
         <Outlet />
       </main>
-      <footer>FOOTER</footer>
+      <Footer />
     </>
   );
 }
