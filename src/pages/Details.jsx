@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ReviewForm from "../components/ReviewForm";
 
 export default function MovieDetails() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
-  const [reviews, setReviews] = useState([]);
-  const [formData, setFormData] = useState({
-    vote: 5,
-    text: "",
-    name: "",
-  });
+  // const [reviews, setReviews] = useState([]);
+  // const [formData, setFormData] = useState({
+  //   vote: 5,
+  //   text: "",
+  //   name: "",
+  // });
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/movies/${id}`)
@@ -19,27 +20,27 @@ export default function MovieDetails() {
       });
   }, [id]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
 
-    fetch(`http://localhost:3000/api/movies/${id}/reviews`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        // Refresh movie data
-        fetch(`http://localhost:3000/api/movies/${id}`)
-          .then((res) => res.json())
-          .then((data) => {
-            setMovie(data);
-            setFormData({ vote: 5, text: "", name: "" });
-          });
-      });
-  };
+  //   fetch(`http://localhost:3000/api/movies/${id}/reviews`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(formData),
+  //   })
+  //     .then((res) => res.json())
+  //     .then(() => {
+  //       // Refresh movie data
+  //       fetch(`http://localhost:3000/api/movies/${id}`)
+  //         .then((res) => res.json())
+  //         .then((data) => {
+  //           setMovie(data);
+  //           setFormData({ vote: 5, text: "", name: "" });
+  //         });
+  //     });
+  // };
 
   if (!movie) {
     return <div className="container my-5">Loading...</div>;
@@ -73,7 +74,18 @@ export default function MovieDetails() {
             </div>
           ))}
 
-          <h4 className="mt-5">Add a review</h4>
+          <ReviewForm
+            movieId={movie.id}
+            onReviewSubmit={() => {
+              fetch(`http://localhost:3000/api/movies/${movie.id}`)
+                .then((res) => res.json())
+                .then((data) => {
+                  setMovie(data); // aggiorna la lista di recensioni
+                });
+            }}
+          />
+
+          {/* <h4 className="mt-5">Add a review</h4>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label className="form-label">Your Name</label>
@@ -116,7 +128,7 @@ export default function MovieDetails() {
             <button type="submit" className="btn btn-primary">
               Submit
             </button>
-          </form>
+          </form> */}
         </div>
       </div>
     </div>
