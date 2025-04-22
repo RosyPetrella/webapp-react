@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLoader } from "../GlobalContentx";
 
 export default function ReviewForm({ movieId, onReviewSubmit }) {
   const [formData, setFormData] = useState({
@@ -6,6 +7,8 @@ export default function ReviewForm({ movieId, onReviewSubmit }) {
     text: "",
     name: "",
   });
+
+  const { showLoader, hideLoader } = useLoader();
 
   const handleSubmit = (e) => {
     e.preventDefault();
