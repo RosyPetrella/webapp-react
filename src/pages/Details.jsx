@@ -72,6 +72,51 @@ export default function MovieDetails() {
               </div>
             </div>
           ))}
+
+          <h4 className="mt-5">Add a review</h4>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label className="form-label">Your Name</label>
+              <input
+                type="text"
+                className="form-control"
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Rating (1-5)</label>
+              <input
+                type="number"
+                className="form-control"
+                min="1"
+                max="5"
+                value={formData.vote}
+                onChange={(e) =>
+                  setFormData({ ...formData, vote: e.target.value })
+                }
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Review</label>
+              <textarea
+                className="form-control"
+                rows="3"
+                value={formData.text}
+                onChange={(e) =>
+                  setFormData({ ...formData, text: e.target.value })
+                }
+                required
+              ></textarea>
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </form>
         </div>
       </div>
     </div>
