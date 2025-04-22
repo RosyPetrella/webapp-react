@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useLoader } from "../GlobalContentx";
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
+  const { showLoader, hideLoader } = useLoader();
 
   useEffect(() => {
+    showLoader();
     fetch("http://localhost:3000/api/movies")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         setMovies(data);
+      })
+      .finally(() => {
+        hideLoader();
       });
-  }, []);
+  }, [showLoader, hideLoader]);
 
   return (
     <>

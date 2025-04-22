@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReviewForm from "../components/ReviewForm";
+import { useLoader } from "../GlobalContentx";
 
 export default function MovieDetails() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
+  const { showLoader, hideLoader } = useLoader();
   // const [reviews, setReviews] = useState([]);
   // const [formData, setFormData] = useState({
   //   vote: 5,
@@ -13,12 +15,16 @@ export default function MovieDetails() {
   // });
 
   useEffect(() => {
+    showLoader();
     fetch(`http://localhost:3000/api/movies/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setMovie(data);
+      })
+      .finally(() => {
+        hideLoader();
       });
-  }, [id]);
+  }, [id, showLoader, hideLoader]);
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
