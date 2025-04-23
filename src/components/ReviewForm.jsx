@@ -32,23 +32,23 @@ export default function ReviewForm({ movieId, onReviewSubmit }) {
 
   return (
     <div className="mt-4">
-      <h4 className="mt-5">Add a review</h4>
+      <h4 className="mt-5 text-dark">Add a review</h4>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label className="form-label">Your Name</label>
+          <label className="form-label text-dark">Your Name</label>
           <input
             type="text"
-            className="form-control"
+            className="form-control bg-dark text-light border-secondary"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
           />
         </div>
         <div className="mb-3">
-          <label className="form-label">Rating (1-5)</label>
+          <label className="form-label text-dark">Rating (1-5)</label>
           <input
             type="number"
-            className="form-control"
+            className="form-control bg-dark text-light border-secondary"
             min="1"
             max="5"
             value={formData.vote}
@@ -57,16 +57,16 @@ export default function ReviewForm({ movieId, onReviewSubmit }) {
           />
         </div>
         <div className="mb-3">
-          <label className="form-label">Review</label>
+          <label className="form-label text-dark">Review</label>
           <textarea
-            className="form-control"
+            className="form-control bg-dark text-light border-secondary"
             rows="3"
             value={formData.text}
             onChange={(e) => setFormData({ ...formData, text: e.target.value })}
             required
           ></textarea>
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-dark btn-outline-light">
           Submit
         </button>
       </form>

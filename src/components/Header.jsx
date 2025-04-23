@@ -3,7 +3,7 @@ export default function Header() {
   return (
     <>
       <header>
-        <nav className="navbar navbar-expand navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="nav navbar-nav">
             <Link
               className="nav-item nav-link active"
